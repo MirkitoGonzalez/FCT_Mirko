@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'surname', 'description', 'email', 'password',
     ];
 
     /**
@@ -28,7 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+     // Relacion de uno a muchos
+    public function posts() {
+        return $this->hasMany('App\Post');
+    }
+    
     /**
+     * No se lo que es pero en los videos no aparecía :)
      * The attributes that should be cast to native types.
      *
      * @var array

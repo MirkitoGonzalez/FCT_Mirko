@@ -6,6 +6,8 @@
 |--------------------------------------------------------------------------
 */
 
+// RUTAS DE PRUEBA
+
 Route::get('/', function () {
     return '<h1>Hola Mundo con Laravel</h1>';
 });
@@ -23,3 +25,12 @@ Route::get('/pruebas/{nombre?}', function ($nombre = null) {
 });
 
 Route::get('/animales', 'PruebasController@index');
+Route::get('/test-orm', 'PruebasController@testOrm');
+
+// RUTAS DE LA API DE VERDAD - LA BUENA
+    //pero estas son para entender como va todo
+    Route::get('usuario/pruebas', 'UserController@pruebas');
+    Route::get('categoria/pruebas', 'CategoryController@pruebas');
+    Route::get('entrada/pruebas', 'PostController@pruebas');
+    
+    
