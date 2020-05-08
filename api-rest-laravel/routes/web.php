@@ -28,9 +28,16 @@ Route::get('/animales', 'PruebasController@index');
 Route::get('/test-orm', 'PruebasController@testOrm');
 
 // RUTAS DE LA API DE VERDAD - LA BUENA
+// 
+// Comunes: GET POST PUT DELETE.
+// 
     //pero estas son para entender como va todo
-    Route::get('usuario/pruebas', 'UserController@pruebas');
-    Route::get('categoria/pruebas', 'CategoryController@pruebas');
-    Route::get('entrada/pruebas', 'PostController@pruebas');
+
+   // Route::get('usuario/pruebas', 'UserController@pruebas');
+   // Route::get('categoria/pruebas', 'CategoryController@pruebas');
+  //  Route::get('entrada/pruebas', 'PostController@pruebas');
     
+    // las que valen ;)
     
+    Route::post('api/register', 'UserController@register');
+    Route::post('api/login', 'UserController@login');

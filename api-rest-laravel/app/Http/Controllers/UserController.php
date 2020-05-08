@@ -11,10 +11,21 @@ class UserController extends Controller
     }
     
     public function register(Request $request){
-        return "Accion de registro de usuarios";
+        /*$name = $request->input('name');
+        $surname = $request->input('surname');
+        return "Accion de registro de usuarios";*/
+        
+        $data = array(
+            'status' => 'error',
+            'code' => 404,
+            'message' => 'El usuario no se creó correctamente'
+        );
+        
+        return response()->json($data,$data['code']);
+        
     }
     
     public function login(Request $request){
-        return "Accion de logueo del usuario";
+        return "Accion de login de usuarios";
     }
 }
