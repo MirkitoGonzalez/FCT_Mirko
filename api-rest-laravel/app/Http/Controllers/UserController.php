@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\User; /* Imprescindible para que podamos hacer new user etc... */
 
 class UserController extends Controller {
 
@@ -30,7 +30,7 @@ class UserController extends Controller {
             $validate = \Validator::make($params_array, [
                         'name' => 'required|alpha',
                         'surname' => 'required|alpha',
-                        'email' => 'required|email|unique:users',
+                        'email' => 'required|email|unique:users', /* si existe deja registrar si no error de validacion */
                         'password' => 'required'
             ]);
 
@@ -74,7 +74,41 @@ class UserController extends Controller {
         }
         return response()->json($data, $data['code']);
     }
+
     public function login(Request $request) {
-        return "Accion de login de usuarios";
+
+        $jwtAuth = new \JwtAuth();
+        // Recibimos los datos por POST
+        $json = $request->input('json', null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+        // Validar los datos
+        $validate = \Validator::make($params_array, [
+                    'email' => 'required|email', /* si existe deja registrar si no error de validacion */
+                    'password' => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            // Algo ha fallado
+            $signup = array(
+                'status' => 'error',
+                'code' => 404,
+                'message' => 'El usuario no se logueó correctamente',
+                'errors' => $validate->errors()
+            );
+        } else {
+            // Cifraremos la Pass
+            $pwd = hash('sha256', $params->password);
+            // Devolver token o Datos
+           $signup = $jwtAuth->signup($params->email, $pwd);
+           if (!empty($params->getToken)){
+               $signup = $jwtAuth->signup($params->email, $pwd, true);
+           }
+        }
+
+
+
+        return response()->json($signup, 200);
     }
+
 }

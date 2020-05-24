@@ -34,7 +34,6 @@ class User extends Authenticatable
     }
     
     /**
-     * No se lo que es pero en los videos no aparecía :)
      * The attributes that should be cast to native types.
      *
      * @var array
