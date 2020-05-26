@@ -6,7 +6,7 @@ use \Firebase\JWT\JWT;
 use Iluminate\Support\Facades\DB;
 use App\User;
 
-class JwtAuth{
+class JwtAuth {
 
     public $key;
 
@@ -34,7 +34,7 @@ class JwtAuth{
                 'name' => $user->name,
                 'surname' => $user->surname,
                 'iat' => time(),
-                'exp' => time() + (7 * 24 * 60 * 60 * 2)
+                'exp' => time() + (7 * 24 * 60 * 60)
             );
 
             $jwt = JWT::encode($token, $this->key, 'HS256'); /* Indicamos tambien el algoritmo de cifrado */
@@ -56,6 +56,29 @@ class JwtAuth{
 
 
         return $data;
+    }
+
+    public function checkToken($jwt, $getIdentity = false) {
+        $auth = false;
+        try {
+            $jwt = str_replace('"', '', $jwt);
+            $decoded = JWT::decode($jwt, $this->key, ['HS256']);
+        } catch (\UnexpectedValueException $e) {
+            $auth = false;
+        } catch (\DomainException $e) {
+            $auth = false;
+        }
+        
+        if(!empty($decoded) && is_object($decoded) && isset($decoded->sub)){
+            $auth = true;
+        }else {$auth = false;}
+        
+        if($getIdentity){
+            return $decoded;
+        }
+        
+        return $auth;
+        
     }
 
 }
