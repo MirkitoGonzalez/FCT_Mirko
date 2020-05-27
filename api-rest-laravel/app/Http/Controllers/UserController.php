@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Helpers\JwtAuth;
 use App\User; /* Imprescindible para que podamos hacer new user etc... */
 
 class UserController extends Controller {
@@ -105,9 +106,6 @@ class UserController extends Controller {
                 $signup = $jwtAuth->signup($params->email, $pwd, true);
             }
         }
-
-
-
         return response()->json($signup, 200);
     }
 
@@ -159,57 +157,75 @@ class UserController extends Controller {
         return response()->json($data, $data['code']);
     }
 
-    // Avatar
+    // Subir Avatar/foto
 
     public function upload(Request $request) {
 
         // Recoger datos de la petición
         $image = $request->file('file0');
-        
+
         // Validar imagen
-        $validate = \Validator::make($request->all(),[
-           'file0' => 'required|image|mimes:jpg,jpeg,png,bmp,gif'
+        $validate = \Validator::make($request->all(), [
+                    'file0' => 'required|image|mimes:jpg,jpeg,png,bmp,gif'
         ]);
-        
+
         // subir avatar/imagen //// guardar
         if (!$image || $validate->fails()) {
-           $data = array(
+            $data = array(
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'El avatar no se ha subido correctamente. Upload'
             );
-        }else{
-             $image_name = str_replace(".","",str_replace($image->getClientOriginalExtension(),'',$image->getClientOriginalName())) . '_' . time() . '.' . $image->getClientOriginalExtension();
+        } else {
+            $image_name = str_replace(".", "", str_replace($image->getClientOriginalExtension(), '', $image->getClientOriginalName())) . '_' . time() . '.' . $image->getClientOriginalExtension();
             \Storage::disk('users')->put($image_name, \File::get($image));
-            
+
             $data = array(
                 'code' => '200',
                 'status' => 'success',
                 'image' => $image_name
             );
         }
-
         return response()->json($data, $data['code']);
     }
 
-    public function getImage($filename){
-        
+    // para obtener el aavatar de nuestro usuario ETC
+    public function getImage($filename) {
+
         $isset = \Storage::disk('users')->exists($filename);
-        
-        if($isset){
-        
-        $file = \Storage::disk('users')->get($filename);
-        return new Response($file, 200);
-        }
-        else{
+
+        if ($isset) {
+
+            $file = \Storage::disk('users')->get($filename);
+            return new Response($file, 200);
+        } else {
             $data = array(
                 'code' => '404',
                 'status' => 'error',
                 'message' => 'La imagen no existe'
             );
-            
+
             return response()->json($data, $data['code']);
         }
     }
-    
+
+    // obtener detalles 
+    public function detail($id) {
+        $user = User::find($id);
+
+        if (is_object($user)) {
+            $data = array(
+                'code' => '200',
+                'status' => 'success',
+                'user' => $user
+            );
+        } else {
+            $data = array(
+                'code' => '404',
+                'status' => 'error',
+                'message' => 'El usuario no existe en la BBDD'
+            );
+        }
+        return response()->json($data, $data['code']);
+    }
 }

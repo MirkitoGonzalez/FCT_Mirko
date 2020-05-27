@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class ApiAuthMiddleware{
+class ApiAuthMiddleware {
+
     /**
      * Handle an incoming request.
      *
@@ -20,13 +21,13 @@ class ApiAuthMiddleware{
         $jwtAuth = new \JwtAuth();
         $checkToken = $jwtAuth->checkToken($token);
 
-        if ($checkToken){
+        if($checkToken){
             return $next($request);
-        }else {
+        }else{
             $data = array(
                 'status' => 'error',
                 'code' => 400,
-                'message' => 'Error de Subida! Mw-'
+                'message' => 'No estás identificado!!'
             );
             return response()->json($data, $data['code']);
         }
