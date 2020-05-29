@@ -55,3 +55,6 @@ Route::resource('/api/category','CategoryController');
 // Rutas del Controlador de Categorías/Post´s
 Route::resource('/api/post','PostController');
 Route::post('/api/post/upload', 'PostController@upload');
+Route::get('api/post/image/{filename}', 'PostController@getImage');
+Route::get('api/post/category/{id}', 'PostController@getPostByCategory');
+Route::get('api/post/user/{id}', 'PostController@getPostByUser');

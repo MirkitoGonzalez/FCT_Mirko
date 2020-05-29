@@ -10,7 +10,8 @@ use App\Helpers\JwtAuth;
 class PostController extends Controller {
 
     public function __construct() {
-        $this->middleware('api.auth', ['except' => [/* 'index', */'show']]);
+        $this->middleware('api.auth', ['except' =>
+            [/* 'index', */'show', 'getImage', 'getPostByUser', 'getPostByCategory']]);
     }
 
     public function index() {
@@ -208,7 +209,7 @@ class PostController extends Controller {
         $image = $request->file('file0');
         // Validarla
         $validate = \Validator::make($request->all(), [
-                    'file0' => 'required|image|mimes:jpg,jpeg,bmp,png,gif',                    
+                    'file0' => 'required|image|mimes:jpg,jpeg,bmp,png,gif',
         ]);
         // Guardarla
         if (!$image || $validate->fails()) {
@@ -219,10 +220,10 @@ class PostController extends Controller {
             ];
         } else {
             $image_name = str_replace(".", "", str_replace($image
-                ->getClientOriginalExtension(), '', $image
-                ->getClientOriginalName())) . '_' . time() . '.' . $image
-                ->getClientOriginalExtension();
-                
+                                            ->getClientOriginalExtension(), '', $image
+                                            ->getClientOriginalName())) . '_' . time() . '.' . $image
+                            ->getClientOriginalExtension();
+
             \Storage::disk('images')->put($image_name, \File::get($image));
 
             // Devolver resultados
@@ -232,6 +233,40 @@ class PostController extends Controller {
                 'image' => $image_name
             ];
         }
+        //devolver los datoss
         return response()->json($data, $data['code']);
     }
+
+    public function getImage($filename) {
+        // Comprobar si existe la imagen a recibir
+        $isset = \Storage::disk('images')->exists($filename);
+
+        if ($isset) {
+            // Conseguir la imagen
+            $file = \Storage::disk('images')->get($filename);
+            // Devolver la imagen
+            return new Response($file, 200);
+        } else {
+            // Mostrar error si algo va mal
+            $data = [
+                'status' => 'error',
+                'code' => 400,
+                'message' => 'No existe la imagen.'
+            ];
+        }
+        return response()->json($data, $data['code']);
+    }
+
+    // Todos los post/entradas de una categoría
+    public function getPostByCategory($id) {
+        $posts = Post::where('category_id', $id)->get();
+        return response()->json(['status' => 'success', 'posts' => $posts], 200);
+    }
+
+    // Todos los post/entradas de un usuario
+    public function getPostByUser($id) {
+        $posts = Post::where('user_id', $id)->get();
+        return response()->json(['status' => 'success', 'posts' => $posts], 200);
+    }
+
 }

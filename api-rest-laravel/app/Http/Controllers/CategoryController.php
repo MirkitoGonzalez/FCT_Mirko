@@ -94,7 +94,7 @@ class CategoryController extends Controller {
            'name' => 'required' 
         ]);
         // Quitamos o evitamos actualizar algo
-        unset($params_array['id']);
+            unset($params_array['id']);
         unset($params_array['created_at']);
         
         // Actualizar registro
