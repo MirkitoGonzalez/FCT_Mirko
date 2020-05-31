@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos propios */
+
+/* BLOQUEAR DRAG */
+a.nav-link {
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+}
+a{
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+}
+img {
+    -webkit-app-region: no-drag;
+    -webkit-user-drag: none;
+}
+
+/* DropBarDesplegable - Hacia la izquierda */
+li.nav-item.dropdown.show {
+    margin-right: 70px;
+}
+li.nav-item.dropdown {
+    margin-right: 70px;
+}
+
+/* Registro y Login Ajustados a mi disposición preferida */
+a#espaciado {
+    margin-right: 120px;
+}
