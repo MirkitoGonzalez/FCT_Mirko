@@ -30,3 +30,17 @@ li.nav-item.dropdown {
 a#espaciado {
     margin-right: 120px;
 }
+
+/* opciones tras registro */
+a#aceptame {
+    box-shadow: 0 0 20px black;
+}
+
+/* Registro limites */
+input.form-control {
+    max-width: 50ch;
+}
+input.btn.btn-success {
+    margin-left: 13.5%;
+    margin-top: 4px;
+}

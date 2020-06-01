@@ -18,19 +18,19 @@
           <a class="nav-link" href="#"> </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><img width="36" src="../assets/img/cape.svg" /> Inicio </a>
+          <a class="nav-link" [routerLink]="['/inicio']"><img width="36" src="../assets/img/cape.svg" /> Inicio </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><img width="36" src="../assets/img/iceberg.svg" /> Categorías </a>
+          <a class="nav-link" [routerLink]="['/categorias']"><img width="36" src="../assets/img/iceberg.svg" /> Categorías </a>
         </li>
       </ul>
 
       <ul class="navbar-nav navbar-right">
         <li class="nav-item">
-          <a class="nav-link" href="#"> Login </a>
+          <a class="nav-link" [routerLink]="['/login']"> Login </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="espaciado" href="#"> Registro </a>
+          <a class="nav-link" id="espaciado" [routerLink]="['/registro']"> Registro </a>
         </li>
       </ul>
 
@@ -55,4 +55,10 @@
     </form> -->
     </div>
   </nav> <!-- Cerramos barra de navegación -->
+
+  <!-- CONTENIDO -->
+  <!-- <login></login>
+  <register></register> -->
+  <router-outlet></router-outlet>
+
 </div> <!-- Cerramos Contenedor principal -->

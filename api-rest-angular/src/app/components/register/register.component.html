@@ -1,0 +1,42 @@
+<div class="col-md-12 mt-3">
+  <h1>{{ page_title }}</h1>
+  <p *ngIf="status != 'success'"> Registrate para formar parte de nuestra comunidad</p>
+
+  <!-- Alertas -->
+  <div class="alert alert-success col-md-6" *ngIf="status == 'success'">
+      El registro se ha completado correctamente, <a id="aceptame" [routerLink]="['/login']">A qué esperas? LOG!!</a>
+  </div>
+
+  <div class="alert alert-danger col-md-6" *ngIf="status == 'error'">
+    El registro ha fallado, prueba de nuevo ♥
+</div>
+
+  <!-- Formulario Registro -->
+  <form class="col-md-6" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+    <div class="form-group">
+      <label for="name">Nombre:    </label>
+      <input type="text" maxlength="24" name="name" class="form-control" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z\s]+">
+      <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">  El nombre no es válido. </small>
+    </div>
+
+    <div class="form-group">
+      <label for="surname">Apellido:  </label>
+      <input type="text" maxlength="24" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="user.surname" required pattern="[a-zA-ZÀ-ÿ\s\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+      <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">  Los apellidos no son válidos. </small>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:        </label>
+      <input type="email" maxlength="40" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">  El email no es válido. </small>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:  </label>
+      <input type="password" maxlength="16" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required>
+      <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">  La contraseña no es válida. </small>
+    </div>
+
+    <input type="submit" value="Registrarme" class="btn btn-success" [disabled]="registerForm.invalid">
+  </form>
+
+</div>
