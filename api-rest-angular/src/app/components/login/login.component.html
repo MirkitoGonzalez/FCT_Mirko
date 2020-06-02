@@ -1,4 +1,31 @@
-
-    <h1>{{ page_title }}</h1>
-    <p> Logueate para formar parte de nuestra comunidad</p>
-  
+    <div class="col-md-12 mt-3">
+        <h1>{{ page_title }}</h1>
+        <p *ngIf="status != 'success'"> Loguéate para formar parte de nuestra comunidad</p>
+      
+        <!-- Alertas -->
+         <div class="alert alert-success col-md-6" *ngIf="status == 'success'">
+            El login se ha realizado correctamente
+        </div>
+      
+      <div class="alert alert-danger col-md-6" *ngIf="status == 'error'">
+          Status = Error, El login ha fallado, prueba de nuevo ♥
+      </div>
+      
+        <!-- Formulario Login -->
+        <form class="col-md-6" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <div class="form-group">
+            <label for="email">Email:        </label>
+            <input type="email" maxlength="40" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">  El email no es válido. </small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:  </label>
+            <input type="password" maxlength="16" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required>
+            <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">  La contraseña no es válida. </small>
+          </div>
+      
+          <input type="submit" value="Identificarse" class="btn btn-success" [disabled]="loginForm.invalid">
+        </form>
+      
+      </div>
+      

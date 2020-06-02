@@ -13,7 +13,11 @@ const appRoutes: Routes = [
 {path: '', component: HomeComponent},
 {path: 'inicio', component: HomeComponent},
 {path: 'login', component: LoginComponent},
+/* Para evitar otro componente usamos el del login para mandarle
+este parametro extra y que nos expulse de nuestra sesión*/
+{path: 'logout/:sure', component: LoginComponent},
 {path: 'registro', component: RegisterComponent},
+/* si el usuario se equivoca y la ruta no existe... */
 {path: '**', component: ErrorComponent}
 ];
 

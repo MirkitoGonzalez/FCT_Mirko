@@ -21,11 +21,12 @@
           <a class="nav-link" [routerLink]="['/inicio']"><img width="36" src="../assets/img/cape.svg" /> Inicio </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/categorias']"><img width="36" src="../assets/img/iceberg.svg" /> Categorías </a>
+          <a class="nav-link" [routerLink]="['/categorias']"><img width="36" src="../assets/img/iceberg.svg" />
+            Categorías </a>
         </li>
       </ul>
 
-      <ul class="navbar-nav navbar-right">
+      <ul class="navbar-nav navbar-right" *ngIf="!identity">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/login']"> Login </a>
         </li>
@@ -34,15 +35,15 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav navbar-right mx-sm-1">
+      <ul class="navbar-nav navbar-right mx-sm-1" *ngIf="identity && identity.name">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">NombreUsuario</a>
+          <a class="nav-link dropdown-toggle" id="eldeluser" data-toggle="dropdown" href="#" role="button"
+            aria-haspopup="true" aria-expanded="false">{{identity.name + ' ' + identity.surname}}</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#">Crear Entrada</a>
             <a class="dropdown-item" href="#">Crear Categoría</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><img width="25" src="../assets/img/profile.svg"/>Mi Perfil</a>
+            <a class="dropdown-item" href="#"><img width="25" src="../assets/img/profile.svg" />Mi Perfil</a>
             <a class="dropdown-item" href="#">Ajustes</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Cerrar Sesión</a>
