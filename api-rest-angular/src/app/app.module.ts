@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
+import {AngularFileUploaderModule, AngularFileUploaderService } from "angular-file-uploader";
+import {AngularFileUploaderComponent } from "angular-file-uploader";
+import {AngularFileUploaderConfig } from "angular-file-uploader";
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 /*import { HttpClient, HttpHeaders } from '@angular/common/http';*/
 
@@ -26,6 +29,7 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AngularFileUploaderModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     routing

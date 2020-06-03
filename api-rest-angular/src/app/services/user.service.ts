@@ -43,7 +43,7 @@ export class UserService {
 
     update(token, user): Observable<any> {
     let json = JSON.stringify(user);
-    let params = 'json=' + json;
+    let params = 'json='+json;
 
     let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
                                    .set('Authorization', token);
@@ -71,5 +71,10 @@ export class UserService {
         else {
             this.token = null;
         }
+        return this.token;
     }
+
+    getUser(id): Observable<any> {
+        return this._http.get(this.url + 'user/detail/' + id);
+      }
 }

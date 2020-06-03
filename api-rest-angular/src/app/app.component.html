@@ -39,7 +39,9 @@
       <ul class="navbar-nav navbar-right mx-sm-1" *ngIf="identity && identity.name">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="eldeluser" data-toggle="dropdown" href="#" role="button"
-            aria-haspopup="true" aria-expanded="false">{{identity.name + ' ' + identity.surname}}</a>
+            aria-haspopup="true" aria-expanded="false">
+            <img id="avatarNav" src="{{url + 'user/image/' + identity.image }}" />
+            {{identity.name + ' ' + identity.surname}}</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#"><img width="25" src="../assets/img/post.svg"/> Crear Entrada</a>
             <a class="dropdown-item" href="#"><img width="25" src="../assets/img/categoria.svg"/> Crear Categoría</a>
@@ -63,4 +65,9 @@
   <register></register> -->
   <router-outlet></router-outlet>
 
+<footer id="footer">
+    <hr>
+    Proyecto Angular Laravel Para el TFG IES SanSebastián (Huelva) &copy;
+    <hr>  
+  </footer>
 </div> <!-- Cerramos Contenedor principal -->

@@ -56,3 +56,25 @@ textarea#biografia {
     width: 431px;
     resize: none;
 }
+
+/* tamaño del avatar en el navbar */
+img#avatarNav {
+    width: 60px;
+    border-top-left-radius: 45%;
+    /* border-top-right-radius: 45%; */
+    border-bottom-right-radius: 45%;
+    /* border-bottom-left-radius: 45%; */
+}
+
+/* tamaño de la foto de usuario al editarla */
+img#avatarEdit {
+    border-radius: 7%;
+    width: 360px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+/*pequeña separación para los botones del final de la página*/
+input#btedit {
+    margin-bottom: 15px;
+}
