@@ -50,3 +50,9 @@ a#eldeluser:hover {
     font-weight: bold;
     color: #9C27B0;
 }
+
+/* textarea de la bio */
+textarea#biografia {
+    width: 431px;
+    resize: none;
+}

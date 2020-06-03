@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
@@ -26,13 +26,17 @@ export class LoginComponent implements OnInit {
     this.user = new User(1, '', '', 'ROLE_USER', '', '', '', '');
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    /* siempre se ejecutará y solo cerrará sesion
+    al llegarle el parámetro Sure opr la Url */
+    this.logout();
+  }
 
   onSubmit(loginForm): void {
     this._userService.signup(this.user).subscribe(
       response => {
         // TOKEN 
-        if(response.status != 'error'){
+        if (response.status != 'error') {
           this.status = 'success';
           this.token = response;
 
@@ -44,8 +48,10 @@ export class LoginComponent implements OnInit {
               console.log(this.identity);
 
               // Persistencia de los datos de usuarios autentificados
-              localStorage.setItem('token',this.token);
+              localStorage.setItem('token', this.token);
               localStorage.setItem('identity', JSON.stringify(this.identity));
+              /* Lo mandamos al inicio */
+              this._router.navigate(['inicio']);
             },
             error => { this.status = 'error'; console.log(<any>error); }
           );
@@ -57,20 +63,20 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  logout(){
+  logout() {
     this._route.params.subscribe(params => {
-      let logout = +params['sure']; 
+      let logout = +params['sure'];
       // cambiamos el tipo de string con el "más +" a entero
 
-      if(logout == 1){
+      if (logout == 1) {
         localStorage.removeItem('identity');
         localStorage.removeItem('token');
 
-        this.identity= null;
+        this.identity = null;
         this.token = null;
 
-        /* Lo mandamos al inicio */
-        this._router.navigate 
+        /* Lo mandamos al logueo pues ya está fuera de la app */
+        this._router.navigate(['login']);
       }
     });
   }

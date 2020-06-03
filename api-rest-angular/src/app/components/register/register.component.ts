@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { global } from 'src/app/services/global';
 
 @Component({
   selector: 'register',
@@ -38,8 +39,6 @@ export class RegisterComponent implements OnInit {
       },
       error => { this.status = 'error'; console.log(<any>error); }
     );
-
-/**/
 
   }
 }

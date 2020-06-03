@@ -1,0 +1,48 @@
+<div class="col-md-12 mt-3">
+    <h1>{{ page_title }}</h1>
+    <p *ngIf="status != 'success'">♦ Edita tu perfil ♦</p>
+    <hr> <!-- separamos con HR  -->
+  
+    <!-- Alertas -->
+    <!-- <div class="alert alert-success col-md-6" *ngIf="status == 'success'">
+        Se ha editado el usuario correctamente, <a id="aceptame" [routerLink]="['/login']">A qué esperas? LOG!!</a>
+    </div>
+  
+    <div class="alert alert-danger col-md-6" *ngIf="status == 'error'">
+      La edición ha fallado, prueba de nuevo ♥
+  </div> -->
+  
+    <!-- Formulario Registro -->
+    <form class="col-md-6" #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+      <div class="form-group">
+        <label for="name">Nombre:    </label>
+        <input type="text" maxlength="24" name="name" class="form-control" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z\s]+">
+        <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">  El nombre no es válido. </small>
+      </div>
+  
+      <div class="form-group">
+        <label for="surname">Apellido:  </label>
+        <input type="text" maxlength="24" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="user.surname" required pattern="[a-zA-ZÀ-ÿ\s\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+        <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">  Los apellidos no son válidos. </small>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email:        </label>
+        <input type="email" maxlength="40" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">  El email no es válido. </small>
+      </div>
+     
+      <div class="form-group">
+        <label for="description">Biografía:  </label>
+        <textarea [froalaEditor] id="biografia" maxlength="100" cols="3" rows="3"
+        name="description" class="form-control" #description="ngModel" [(ngModel)]="user.description"> </textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Avatar:  </label>
+        <input type="file"name="image" class="form-control" #image="ngModel" [(ngModel)]="user.image">
+      </div>
+  
+      <input type="submit" value="Actualizar" class="btn btn-success" [disabled]="editForm.invalid">
+    </form>
+  </div>

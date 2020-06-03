@@ -7,16 +7,18 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 /* Definimos las rutas del proyecto */
 const appRoutes: Routes = [
-{path: '', component: HomeComponent},
+/* {path: '', component: HomeComponent}, */
 {path: 'inicio', component: HomeComponent},
 {path: 'login', component: LoginComponent},
 /* Para evitar otro componente usamos el del login para mandarle
 este parametro extra y que nos expulse de nuestra sesión*/
 {path: 'logout/:sure', component: LoginComponent},
 {path: 'registro', component: RegisterComponent},
+{path: 'ajustes', component: UserEditComponent},
 /* si el usuario se equivoca y la ruta no existe... */
 {path: '**', component: ErrorComponent}
 ];
