@@ -34,7 +34,8 @@
 
       <div class="form-group">
         <label for="password">Password:  </label>
-        <input type="password" minlength="8" maxlength="16" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required>
+        <!-- CONTRASEÑA -->
+        <input type="password" minlength="5" maxlength="16" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required>
         <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">  La contraseña no es válida. </small>
       </div>
      
@@ -52,7 +53,8 @@
 
         <angular-file-uploader
         [config]="afuConfig"
-        (ApiResponse)="avatarUpload($event)">
+        (ApiResponse)="avatarUpload($event)"
+        >
       </angular-file-uploader>
       </div>
   

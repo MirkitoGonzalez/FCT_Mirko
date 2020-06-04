@@ -33,9 +33,12 @@ class JwtAuth {
                 'email' => $user->email,
                 'name' => $user->name,
                 'surname' => $user->surname,
+                'image' => $user->image,
                 'iat' => time(),
                 'exp' => time() + (7 * 24 * 60 * 60)
             );
+
+
 
             $jwt = JWT::encode($token, $this->key, 'HS256'); /* Indicamos tambien el algoritmo de cifrado */
             $decoded = JWT::decode($jwt, $this->key, ['HS256']);
@@ -53,8 +56,6 @@ class JwtAuth {
                 'message' => 'Login Incorrecto.'
             );
         }
-
-
         return $data;
     }
 
@@ -76,9 +77,7 @@ class JwtAuth {
         if($getIdentity){
             return $decoded;
         }
-        
-        return $auth;
-        
+        return $auth;        
     }
 
 }

@@ -29,7 +29,7 @@ export class UserEditComponent implements OnInit {
   };
   public afuConfig = {
     multiple: false,
-    formatsAllowed: '.jpg, .png, .gif, .jpeg, .svg',
+    formatsAllowed: '.jpg, .png, .gif, .jpeg',
     maxSize: '50',
     uploadAPI: {
       url: global.url + 'user/upload',
@@ -41,15 +41,15 @@ export class UserEditComponent implements OnInit {
     hideProgressBar: false,
     hideResetBtn: true,
     hideSelectBtn: false,
-    replaceTexts: {
+    replaceTexts:{
       selectFileBtn: 'Selecciona tu Avatar',
       resetBtn: 'Reset',
       uploadBtn: 'Subir archivo',
       dragNDropBox: 'Arrastra y Suelta',
       attachPinBtn: 'Selecciona tu Avatar',
       afterUploadMsg_success: 'Archivo guardado satisfactoriamente',
-      afterUploadMsg_error: 'La subida del archivo ha fallado!'
-    }
+      afterUploadMsg_error: 'La subida del archivo ha fallado!',
+    },
   };
 
   constructor(
@@ -73,7 +73,7 @@ export class UserEditComponent implements OnInit {
       'ROLE_USER',
       this.identity.email,
       '',
-      '',
+      'default.png',
       '');
   }
 
@@ -96,13 +96,14 @@ export class UserEditComponent implements OnInit {
           this.status = 'success';
           console.log('aqui puede que si');
           /* Actualizamos la sesión del usuario y sus cambios */
-          // if (response.changes.name) { this.identity.name = response.changes.name; }
-          // if (response.changes.surname) { this.identity.surname = response.changes.surname; }
-          // if (response.changes.email) { this.identity.email = response.changes.email; }
-          //if (response.changes.description) { this.identity.description = response.changes.description; }
-          //if (response.changes.image) { this.identity.image = response.changes.image; }
-          // localStorage.setItem('identity', JSON.stringify(this.identity));
-          // editform.reset();
+          if (response.changes.name) { this.identity.name = response.changes.name; }
+          if (response.changes.surname) { this.identity.surname = response.changes.surname; }
+          if (response.changes.email) { this.identity.email = response.changes.email; }
+          if (response.changes.description) { this.identity.description = response.changes.description; }
+          if (response.changes.image) { this.identity.image = response.changes.image; }
+          
+          localStorage.setItem('identity', JSON.stringify(this.identity));
+          //editform.reset();
 
           /* Petición POSTMAN */
           // {"description":"prueba","email":"admin@admin.com","name":"admin","surname":"admin","image":"avatar.jpg"}
@@ -115,8 +116,7 @@ export class UserEditComponent implements OnInit {
   }
 
 avatarUpload(datos){
-let data = JSON.parse(datos.response);
-this.user.image = data.image;
+this.user.image = (datos.body.image);
 }
 
   getUser(id) {
@@ -128,13 +128,14 @@ this.user.image = data.image;
           // Asignamos los datos del usuario,
           // ya que el response.user tiene datos extra
           this.user.image = response.user.image;
+          
           this.user.name = response.user.name;
           this.user.surname = response.user.surname;
           this.user.email = response.user.email;
           this.user.description = response.user.description;
           console.log(this.user);
         } else {
-          this._router.navigate(['home']);
+          this._router.navigate(['inicio']);
         }
       },
       (error) => {

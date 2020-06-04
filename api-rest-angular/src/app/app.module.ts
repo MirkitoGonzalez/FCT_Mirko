@@ -7,7 +7,6 @@ import {AngularFileUploaderModule, AngularFileUploaderService } from "angular-fi
 import {AngularFileUploaderComponent } from "angular-file-uploader";
 import {AngularFileUploaderConfig } from "angular-file-uploader";
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-/*import { HttpClient, HttpHeaders } from '@angular/common/http';*/
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
