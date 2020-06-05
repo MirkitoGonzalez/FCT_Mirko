@@ -10,10 +10,10 @@ use App\Helpers\JwtAuth;
 class CategoryController extends Controller {
 
     public function __construct() {
-        $this->middleware('api.auth', ['except' => [/* 'index', */'show']]);
+        $this->middleware('api.auth', ['except' => [ 'index', 'show']]);
     }
 
-    public function index() {
+    public function index() /* MOSTRAR CATEGORIAS    */ {
         $categories = Category::all();
 
         return response()->json([

@@ -21,10 +21,13 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/inicio']"><img width="36" src="../assets/img/inicio.svg" /> Inicio </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/categorias']"><img width="36" src="../assets/img/categorias.svg" />
-            Categorías </a>
+        <li class="nav-item dropdown show">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"><img width="36" src="../assets/img/categorias.svg" /> Categorías</a>
+          <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 42px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+            <a class="dropdown-item" *ngFor="let category of categories" [routerLink]="['/inicio']">{{category.name}}</a>
+          </div>
         </li>
+        
       </ul>
 
       <ul class="navbar-nav ml-auto" *ngIf="!identity">
@@ -43,8 +46,8 @@
             <img id="avatarNav" src="{{url + 'user/image/' + identity.image }}" />
             {{identity.name + ' ' + identity.surname}}</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#"><img width="25" src="../assets/img/post.svg"/> Crear Entrada</a>
-            <a class="dropdown-item" href="#"><img width="25" src="../assets/img/categoria.svg"/> Crear Categoría</a>
+            <a class="dropdown-item" [routerLink]="['/crearEntrada']"><img width="25" src="../assets/img/post.svg"/> Crear Entrada</a>
+            <a class="dropdown-item" [routerLink]="['/crearCategoria']"><img width="25" src="../assets/img/categoria.svg"/> Crear Categoría</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#"><img width="25" src="../assets/img/profile.svg"/> Mi Perfil</a>
             <a class="dropdown-item" [routerLink]="['/ajustes']"><img width="25" src="../assets/img/ordenador.svg"/> Ajustes</a>
@@ -66,8 +69,7 @@
   <router-outlet></router-outlet>
 
 <footer id="footer">
-    <hr>
-    Proyecto Angular Laravel Para el TFG IES SanSebastián (Huelva) &copy;
+  &copy; IES SanSebastián (21110) &copy; Mirko González Antón &copy; 
     <hr>  
   </footer>
 </div> <!-- Cerramos Contenedor principal -->

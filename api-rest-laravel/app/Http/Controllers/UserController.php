@@ -12,7 +12,7 @@ class UserController extends Controller {
 
     public function __construct(){
         $this->middleware('api.auth',
-        ['except' =>['index', 'upload',  'login', 'detail',
+        ['except' =>['index', 'upload', 'login', 'detail',
          'getImage', 'register', 'avatarUpload']]);
     }
 

@@ -103,7 +103,7 @@ export class UserEditComponent implements OnInit {
           if (response.changes.image) { this.identity.image = response.changes.image; }
           
           localStorage.setItem('identity', JSON.stringify(this.identity));
-          //editform.reset();
+          editform.reset();
 
           /* Petición POSTMAN */
           // {"description":"prueba","email":"admin@admin.com","name":"admin","surname":"admin","image":"avatar.jpg"}
@@ -135,7 +135,7 @@ this.user.image = (datos.body.image);
           this.user.description = response.user.description;
           console.log(this.user);
         } else {
-          this._router.navigate(['inicio']);
+          this._router.navigate(['/inicio']);
         }
       },
       (error) => {

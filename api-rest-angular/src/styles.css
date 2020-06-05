@@ -78,3 +78,16 @@ img#avatarEdit {
 input#btedit {
     margin-bottom: 15px;
 }
+
+#footer {
+    position: absolute;
+    /* bottom: 0px; */
+    width: 100%;
+    text-align: right;
+    /* margin-top: 15px; */
+    /* z-index: 10; */
+  }
+
+form.col-md-6.ng-untouched.ng-pristine.ng-invalid {
+    margin-bottom: 30px;
+}

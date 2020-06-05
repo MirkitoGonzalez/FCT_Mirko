@@ -1,0 +1,33 @@
+<div class="col-md-12 mt-3">
+    <h1>{{ page_title }}</h1>
+    <!-- <p *ngIf="status != 'success'">♦ Crea tu entrada ♦</p> -->
+    <hr> <!-- separamos con HR  -->
+  
+    <!-- Alertas -->
+    <!-- <div class="alert alert-success col-md-6" *ngIf="status == 'success'">
+        ♦ Se ha editado el usuario correctamente ♦
+    </div>
+  
+    <div class="alert alert-danger col-md-6" *ngIf="status == 'error'">
+      La edición ha fallado, prueba de nuevo ♥
+  </div> -->
+  
+    <!-- Formulario Crear entrada -->
+     <form class="col-md-6" #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+      <div class="form-group">
+        <label for="title">Nombre:    </label>
+        <input type="text" maxlength="24" name="title" class="form-control" #title="ngModel" [(ngModel)]="post.title" required>
+        <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">  El título no es válido. </small>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Biografía:  </label>
+        <textarea [froalaEditor]="options" id="biografia" maxlength="100" cols="3" rows="3"
+        name="content" class="form-control" #content="ngModel" [(ngModel)]="post.content"> </textarea>
+      </div>
+  
+  
+      <input type="submit" id="btnedit" value="Actualizar" class="btn btn-success"
+      [disabled]="postForm.invalid">
+    </form> 
+</div>

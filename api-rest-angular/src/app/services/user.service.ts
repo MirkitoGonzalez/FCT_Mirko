@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
 import { User } from '../models/user';
 import { global } from './global';
 
