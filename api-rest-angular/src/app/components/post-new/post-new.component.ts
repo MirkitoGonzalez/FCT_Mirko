@@ -7,12 +7,13 @@ import { User } from '../../models/user';
 import { Category } from '../../models/category';
 import { Post } from '../../models/post';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'newpost',
   templateUrl: './post-new.component.html',
   styleUrls: ['./post-new.component.css'],
-  providers: [UserService, CategoryService]
+  providers: [UserService, CategoryService, PostService]
 })
 export class PostNewComponent implements OnInit {
 
@@ -22,6 +23,7 @@ export class PostNewComponent implements OnInit {
   public status;
   public url;
   public post: Post;
+  public categories;
   
   public options: Object = {
     placeholderText: 'Escribe tu entrada aquí',
@@ -36,7 +38,7 @@ export class PostNewComponent implements OnInit {
     formatsAllowed: '.jpg, .png, .gif, .jpeg',
     maxSize: '50',
     uploadAPI: {
-      url: global.url + 'user/upload',
+      url: global.url + 'post/upload',
       headers: {
         'Authorization': this._userService.getToken()
       }
@@ -46,11 +48,11 @@ export class PostNewComponent implements OnInit {
     hideResetBtn: true,
     hideSelectBtn: false,
     replaceTexts:{
-      selectFileBtn: 'Selecciona tu Avatar',
+      selectFileBtn: 'Selecciona tu imagen',
       resetBtn: 'Reset',
       uploadBtn: 'Subir archivo',
       dragNDropBox: 'Arrastra y Suelta',
-      attachPinBtn: 'Selecciona tu Avatar',
+      attachPinBtn: 'Selecciona tu imagen',
       afterUploadMsg_success: 'Archivo guardado satisfactoriamente',
       afterUploadMsg_error: 'La subida del archivo ha fallado!',
     },
@@ -59,6 +61,7 @@ export class PostNewComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _categoryService: CategoryService,
+    private _postService: PostService,
     private _route: ActivatedRoute,
     private _router: Router
   ) {
@@ -70,12 +73,51 @@ export class PostNewComponent implements OnInit {
    }
 
   ngOnInit(): void {
-this.post = new Post(1,this.identity.sub,1,'','',null,null);
+    this.getCategories();
+    this.post = new Post(1, this.identity.sub,1, '', '', null, null);
 //console.log(this.post);
   }
 
-  onSubmit(): void{
+  onSubmit(postForm): void{
+console.log(this.post);
+this._postService.create(this.token, this.post).subscribe(
+  response => {
+if(response.status == 'success'){
+  this.post = response.post;
+  this.status = 'success';
+  this._router.navigate(['/inicio']);
+}else{
+  this.status='error';
+}
+  },
+  error => {
+    console.log(error);
+    this.status = 'error'
 
+  }
+
+);
+  }
+
+  imageUpload(datos){
+    this.post.image = (datos.body.image);
+  //  let image_data = JSON.parse(datos.response);
+  //  this.post.image = image_data.image;
+    }
+
+  getCategories(){
+    this._categoryService.getCategories().subscribe(
+      response => {
+        if(response.status == 'success'){
+          this.categories = response.categories;
+          //console.log(this.categories);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  
   }
 
 }

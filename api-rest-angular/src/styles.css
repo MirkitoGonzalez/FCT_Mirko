@@ -91,3 +91,9 @@ input#btedit {
 form.col-md-6.ng-untouched.ng-pristine.ng-invalid {
     margin-bottom: 30px;
 }
+
+/* prueba background */
+body,footer{
+background: rgba(243, 150, 155, 0.003);
+
+}

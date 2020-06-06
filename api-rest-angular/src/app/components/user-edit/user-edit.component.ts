@@ -5,7 +5,6 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { global } from '../../services/global';
 
-
 @Component({
   selector: 'update',
   templateUrl: './user-edit.component.html',
@@ -78,9 +77,7 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
    this.getUser(this.identity.sub);
-
   }
 
   onSubmit(editform): void {
@@ -101,8 +98,9 @@ export class UserEditComponent implements OnInit {
           if (response.changes.email) { this.identity.email = response.changes.email; }
           if (response.changes.description) { this.identity.description = response.changes.description; }
           if (response.changes.image) { this.identity.image = response.changes.image; }
-          
+          // lo metemos a la bbdd en memoria
           localStorage.setItem('identity', JSON.stringify(this.identity));
+          // vaciamos los campos
           editform.reset();
 
           /* Petición POSTMAN */
@@ -128,7 +126,6 @@ this.user.image = (datos.body.image);
           // Asignamos los datos del usuario,
           // ya que el response.user tiene datos extra
           this.user.image = response.user.image;
-          
           this.user.name = response.user.name;
           this.user.surname = response.user.surname;
           this.user.email = response.user.email;
@@ -143,5 +140,4 @@ this.user.image = (datos.body.image);
       }
     );
   }
-
 }
