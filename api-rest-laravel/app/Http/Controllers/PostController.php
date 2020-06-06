@@ -11,7 +11,7 @@ class PostController extends Controller {
 
     public function __construct() {
         $this->middleware('api.auth', ['except' =>
-            [/* 'index', */'show', 'getImage', 'getPostByUser', 'getPostByCategory']]);
+            ['index', 'store', 'upload', 'show', 'getImage', 'getPostByUser', 'getPostByCategory']]);
     }
 
     public function index() {
@@ -75,7 +75,8 @@ class PostController extends Controller {
                 $post->user_id = $user->sub;
                 $post->category_id = $params->category_id;
                 $post->title = $params->title;
-                $post->content = $params->content;
+                $post->content = str_replace('</p>','',str_replace('<p>','',$params->content));
+                // Quitamos el <p> </p> de la entrada a la BBDD
                 $post->image = $params->image;
                 $post->save();
 
