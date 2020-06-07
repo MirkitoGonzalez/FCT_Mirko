@@ -1,4 +1,15 @@
+/* Estilos que solo queremos aquí especificamente */
 .card-header {
     background-color: #f6bac752;
-    /* color: beige; */
+}
+
+/* creamos máscara para hacer esto un poco más responsive */
+.post-image{
+    height: 268px;
+    overflow: hidden;
+}
+
+p#pruebaseparado {
+    letter-spacing: 1.75ch;
+    font-family: Oxygen;
 }

@@ -14,11 +14,8 @@ export class CategoryService {
     public token;
     public identity;
 
-    constructor(
-        private _http: HttpClient
-    ) {
-        this.url = global.url;
-    }
+    constructor( private _http: HttpClient )
+        { this.url = global.url; }
 
     create(token, category):Observable<any>{
         let json = JSON.stringify(category);
@@ -28,9 +25,7 @@ export class CategoryService {
     }
 
     getCategories():Observable<any>{
-        
         let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded');
-                                        /* esto es mio por que si */
         return this._http.get(this.url + 'category', {headers: headers});
     }
 }
