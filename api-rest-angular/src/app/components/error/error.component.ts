@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from "jquery";
 
 @Component({
   selector: 'error',
@@ -11,7 +12,12 @@ export class ErrorComponent implements OnInit {
     this.page_title = 'Error - NotFound';
   }
 
+  /* usamos jquery para nuestro propio beneficio y personalizar aun más el ERROR 404 */
   ngOnInit(): void {
+    $("#footer").removeAttr('id').addClass("footerBlack");
+    $('hr').hide();
   }
 
+
+  
 }

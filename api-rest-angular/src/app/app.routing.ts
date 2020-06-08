@@ -14,6 +14,10 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 
+/* cargamos lo necesario para la autenticación del proyecto */
+import { IdentityGuard } from './services/identity.guard';
+import { UserService } from './services/user.service';
+
 /* Definimos las rutas del proyecto */
 const appRoutes: Routes = [
 {path: '', component: HomeComponent},
@@ -23,12 +27,13 @@ const appRoutes: Routes = [
 este parametro extra y que nos expulse de nuestra sesión*/
 {path: 'logout/:sure', component: LoginComponent},
 {path: 'registro', component: RegisterComponent},
-{path: 'ajustes', component: UserEditComponent},
-{path: 'crearCategoria', component: CategoryNewComponent},
-{path: 'crearEntrada', component: PostNewComponent},
+{path: 'ajustes', component: UserEditComponent, canActivate: [IdentityGuard]},
+{path: 'crearCategoria', component: CategoryNewComponent, canActivate: [IdentityGuard]},
+{path: 'crearEntrada', component: PostNewComponent, canActivate: [IdentityGuard]},
 {path: 'entrada/:id', component: PostDetailComponent},
-{path: 'editarEntrada/:id', component: PostEditComponent},
+{path: 'editarEntrada/:id', component: PostEditComponent, canActivate: [IdentityGuard]},
 {path: 'categoria/:id', component: CategoryDetailComponent},
+{path: 'error', component: ErrorComponent},
 /* si el usuario se equivoca y la ruta no existe... */
 {path: '**', component: ErrorComponent}
 ];

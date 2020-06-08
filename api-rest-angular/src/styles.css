@@ -88,6 +88,13 @@ input#btedit {
     /* z-index: 10; */
   }
 
+  
+footer.footerBlack {
+    background: black !important;
+    margin: 0px !important;
+    text-align: center;
+}
+
 form.col-md-6.ng-untouched.ng-pristine.ng-invalid {
     margin-bottom: 30px;
 }
