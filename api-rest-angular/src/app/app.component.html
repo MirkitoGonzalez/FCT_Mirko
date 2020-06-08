@@ -24,7 +24,7 @@
         <li class="nav-item dropdown show">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"><img width="36" src="../assets/img/categorias.svg" /> Categorías</a>
           <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 42px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-            <a class="dropdown-item" *ngFor="let category of categories" [routerLink]="['/inicio']">{{category.name}}</a>
+            <a class="dropdown-item" *ngFor="let category of categories" [routerLink]="['categoria', category.id]">{{category.name}}</a>
           </div>
         </li>
         

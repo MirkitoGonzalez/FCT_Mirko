@@ -56,6 +56,5 @@ export class PostService {
     delete(token, id){
         let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded').set('Authorization', token);
         return this._http.delete(this.url + 'post/' + id, {headers: headers}); //AJAX
-
     }
 }
