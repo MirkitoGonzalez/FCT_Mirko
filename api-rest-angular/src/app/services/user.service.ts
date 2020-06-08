@@ -20,6 +20,10 @@ export class UserService {
         this.url = global.url;
     }
 
+    /* CREATE TRIGGER `user_logActions_after_insert` AFTER INSERT ON `users`
+ FOR EACH ROW INSERT INTO LOGS(logs.id,logs.whodo,logs.descr, logs.fecha)
+VALUES(NEW.id,NEW.name,'se ha creado un usuario',now()) */
+
     /* Esto me hará la peticion AJAX y me devolvera un observable
     donde tendré los datos devueltos por el api o el error */
     register(user): Observable<any> {

@@ -10,10 +10,12 @@ import { ErrorComponent } from './components/error/error.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { CategoryNewComponent } from './components/category-new/category-new.component';
 import { PostNewComponent } from './components/post-new/post-new.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { PostEditComponent } from './components/post-edit/post-edit.component';
 
 /* Definimos las rutas del proyecto */
 const appRoutes: Routes = [
-/* {path: '', component: HomeComponent}, */
+{path: '', component: HomeComponent},
 {path: 'inicio', component: HomeComponent},
 {path: 'login', component: LoginComponent},
 /* Para evitar otro componente usamos el del login para mandarle
@@ -23,6 +25,8 @@ este parametro extra y que nos expulse de nuestra sesión*/
 {path: 'ajustes', component: UserEditComponent},
 {path: 'crearCategoria', component: CategoryNewComponent},
 {path: 'crearEntrada', component: PostNewComponent},
+{path: 'entrada/:id', component: PostDetailComponent},
+{path: 'editarEntrada/:id', component: PostEditComponent},
 /* si el usuario se equivoca y la ruta no existe... */
 {path: '**', component: ErrorComponent}
 ];

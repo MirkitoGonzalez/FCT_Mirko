@@ -1,0 +1,32 @@
+<div class="col-md-12 mt-3" *ngIf="!post">
+  Cargando página...
+</div>
+<div class="container-fluid col-md-12 mt-3" *ngIf="post">
+  <h1 class="text-center justify"> {{ post.title }} </h1>
+  <p class="text-center" id="pruebaseparado">🔥😌{{post.category.name}} - {{ post.user.name }}{{ post.user.surname }}😌🔥 </p>
+
+  <div class="card-columns text-center">
+    <article class="card w-100 text-center">
+      <div class="card-header">
+        <a [routerLink]="['/entrada/', post.id]"> {{ post.title }} {{'-'}} {{ post.created_at }}</a>
+      </div>
+      <div class="card-body">
+        <div class="post-image w-100" *ngIf="post.image">
+          <img src="{{ url + 'post/image/' + post.image }}" class="w-100" />
+        </div>
+        <!-- Si no tenemos imagen en la entrada que nos coja una por defecto fullresponsive = SVG -->
+        <div class="post-image w-100" *ngIf="!post.image">
+          <img class="mt-5" src="../assets/img/nophoto.svg" width="140px" />
+        </div>
+
+        <!-- Action button de interacción -->
+        <div class="post-buttons mt-5">
+          <span>
+            <!-- <p [innerHtml]="post.content"> {{ post.content }} </p> -->
+            <p [innerHtml]="post.content"></p>
+          </span>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

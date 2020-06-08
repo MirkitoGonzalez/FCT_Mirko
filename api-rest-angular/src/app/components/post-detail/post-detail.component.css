@@ -1,0 +1,12 @@
+article.card.w-100.text-center {
+    margin-left: 100%;
+    margin-right: 100%;
+}
+
+/* Así sería responsive hasta con las pantallas mas pequeñajas que veas */
+@media only screen and (max-width: 575px) {
+    article.card.w-100.text-center {
+        margin-left: 0.25px;
+    }
+  }
+

@@ -2,33 +2,33 @@
   Cargando página...
 </div>
 <div class="container-fluid mt-3" *ngIf="posts">
-  <h1  class="text-center justify"> {{ page_title }} </h1>
-  <p class="text-center" id="pruebaseparado"> 🔥😌Tendencias😌🔥 </p>
+  <h1 class="text-center justify"> {{ page_title }} </h1>
+  <h2 class="text-center" id="pruebaseparado"> 🔥😌Tendencias😌🔥 </h2>
 
   <div class="card-columns">
     <article class="card w-100 text-center" *ngFor="let post of posts">
       <div class="card-header">
-        <a [routerLink]="['/inicio']"> {{ post.title }}</a>
+        <a [routerLink]="['/entrada/', post.id]"> {{ post.title }}</a>
       </div>
       <div class="card-body">
         <div class="post-image w-100" *ngIf="post.image">
-            <img src="{{ url + 'post/image/' + post.image }}" class="w-100"/>
+          <img src="{{ url + 'post/image/' + post.image }}" class="w-100" />
         </div>
-            <!-- Si no tenemos imagen en la entrada que nos coja una por defecto fullresponsive = SVG -->
+        <!-- Si no tenemos imagen en la entrada que nos coja una por defecto fullresponsive = SVG -->
         <div class="post-image w-100" *ngIf="!post.image">
-            <img class="mt-5" src="../assets/img/nophoto.svg" width="140px"/>
+          <img class="mt-5" src="../assets/img/nophoto.svg" width="140px" />
         </div>
 
-<!-- Action button de interacción -->
-        <div class="post-buttons mt-5">
-            <a [routerLink]="['/inicio']" class="btn m-1 btn-success"> Leer </a>
-            <span *ngIf="identity && (identity.sub === post.user_id)">
-            <a [routerLink]="['/inicio']" class="btn m-1 btn-info"> Editar </a>
-            <a [routerLink]="['/inicio']" class="btn m-1 btn-danger"> Borrar </a>
-            </span>
+        <!-- Action button de interacción -->
+        <div class="post-buttons mt-4">
+          <a [routerLink]="['/entrada', post.id]" class="btn m-1 btn-success"> Leer </a>
+          <span *ngIf="identity && (identity.sub === post.user_id)">
+            <a [routerLink]="['/editarEntrada', post.id]" class="btn m-1 btn-info"> Editar </a>
+            <a class="btn m-1 btn-danger" (click)="deletePost(post.id)"> Borrar </a>
 
+
+          </span>
         </div>
-
       </div>
     </article>
   </div>

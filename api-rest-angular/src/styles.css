@@ -95,5 +95,14 @@ form.col-md-6.ng-untouched.ng-pristine.ng-invalid {
 /* prueba background */
 body,footer{
 background: rgba(243, 150, 155, 0.003);
+color: lightgray;
+margin-top: 1ch;
+}
 
+/* queremos nuestro boton de borrar en blanco */
+a.btn.btn-danger {
+    color: white;
+}
+a.btn.m-1.btn-danger:hover {
+    color: white;
 }
