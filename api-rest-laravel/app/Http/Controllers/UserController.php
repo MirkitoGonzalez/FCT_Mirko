@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Helpers\JwtAuth;
 use App\User;
+use App\Category;
+use App\Post;
 /* Imprescindible para que podamos hacer new user etc... */
 
 class UserController extends Controller {

@@ -9,7 +9,7 @@ class Post extends Model
     protected $table = 'posts';
             
     protected $fillable = [
-        'title', 'content', 'category_id'
+        'title', 'image' ,'content', 'category_id'
     ];
 
 

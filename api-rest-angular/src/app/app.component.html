@@ -49,7 +49,7 @@
             <a class="dropdown-item" [routerLink]="['/crearEntrada']"><img width="25" src="../assets/img/post.svg"/> Crear Entrada</a>
             <a class="dropdown-item" [routerLink]="['/crearCategoria']"><img width="25" src="../assets/img/categoria.svg"/> Crear Categoría</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><img width="25" src="../assets/img/profile.svg"/> Mi Perfil</a>
+            <a class="dropdown-item" [routerLink]="['/perfil/',identity.sub]"><img width="25" src="../assets/img/profile.svg"/> Mi Perfil</a>
             <a class="dropdown-item" [routerLink]="['/ajustes']"><img width="25" src="../assets/img/ordenador.svg"/> Ajustes</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" [routerLink]="['/logout/1']"><img width="25" src="../assets/img/close.svg"/> Cerrar Sesión</a>

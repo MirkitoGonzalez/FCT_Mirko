@@ -2,6 +2,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
 import { global } from './services/global';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -28,11 +29,13 @@ constructor(
 ngOnInit(){
   console.log('Nuestra web se ha cargado satisfactoriamente ♥');
   this.getCategories();
+  this._categoryService.getCategories();
 }
 
 // hacemos la comprobacion de movimientos o cambios
 ngDoCheck(){
 this.loadUser();
+//this._categoryService.getCategories();
 }
 
 // para no sobrecargar, generamos un método que lo haga donde lo necesitemos
@@ -46,7 +49,6 @@ getCategories(){
     response => {
       if(response.status == 'success'){
         this.categories = response.categories;
-        console.log(this.categories);
       }
     },
     error => {

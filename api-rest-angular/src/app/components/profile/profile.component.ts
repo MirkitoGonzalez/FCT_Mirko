@@ -9,27 +9,27 @@ import { User } from '../../models/user';
 import { Category } from '../../models/category';
 import { Post } from '../../models/post';
 import { AppComponent } from '../../app.component';
-// extra
 import { Inject } from '@angular/core';
-//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { MaterialModule } from './material.module';
-
-
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
   providers: [UserService, CategoryService, PostService]
 })
-export class HomeComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   public page_title: string;
-  public posts: Array<Post>;
+  //public posts: Array<Post>;
+  public posts: any;
+  public user: User;
+  public category: Category;
   public identity;
   public token;
+  public today: number = Date.now();
   public status;
   public url;
   constructor(
@@ -39,42 +39,42 @@ export class HomeComponent implements OnInit {
     private _categoryService: CategoryService,
     private _userService: UserService
   ) {
-    this.page_title = 'Inicio';
+    this.page_title = 'Perfil';
+    this.user = new User(1, '', '', 'ROLE_USER', '', '', '', '');
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = global.url;
+
+    /* Con esto devolvemos al form edit sus datos*/
+    //this.user = this.identity; pero nos peta en el sub del ID
   }
 
   ngOnInit(): void {
-    this.getPosts();
-    this._categoryService.getCategories();  
+    this.getUser(this.identity.sub);
   }
 
-  getPosts() {
-    this._postService.getPosts().subscribe(
-      response => {
+  getUser(id) {
+    this._userService.getUser(id).subscribe(
+      (response) => {
         if (response.status == 'success') {
-          this.posts = response.posts;
-          //console.log(this.posts);
+          /* console.log("response");
+          console.log(response); */
+          // Asignamos los datos del usuario,
+          // ya que el response.user tiene datos extra
+          this.user.image = response.user.image;
+          this.user.name = response.user.name;
+          this.user.surname = response.user.surname;
+          this.user.email = response.user.email;
+          this.user.description = response.user.description;
+          console.log(this.user); // se puede obviar
+        } else {
+          this._router.navigate(['/inicio']);
         }
       },
-      error => {
-        console.log(error);
+      (error) => {
+        console.log(<any>error);
       }
     );
   }
 
-  deletePost(id) {
-    let borrar = confirm("¿Seguro que quieres borrar la entrada?"); // un poquito de javascript bueno
-    if(borrar){
-    this._postService.delete(this.token, id).subscribe(
-      response => {
-        this.getPosts();
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    }else{ /* no hago nada */ }
-  }
 }

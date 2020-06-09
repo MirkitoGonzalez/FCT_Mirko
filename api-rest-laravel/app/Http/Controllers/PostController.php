@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Post;
+use App\Category;
+use App\User;
 use App\Helpers\JwtAuth;
 
 class PostController extends Controller {
@@ -14,6 +16,7 @@ class PostController extends Controller {
             ['index', 'store', 'upload', 'show', 'getImage', 'getPostByUser', 'getPostByCategory']]);
     }
 
+    // listar todos getposts
     public function index() {
         $posts = Post::all()->load('category');
 
@@ -24,8 +27,9 @@ class PostController extends Controller {
                         ], 200);
     }
 
+    // detalles proximamente
     public function show($id) {
-        $post = Post::find($id)->load('category');
+        $post = Post::find($id)->load('category')->load('user');
 
         if (is_object($post)) {
             $data = [
@@ -40,7 +44,6 @@ class PostController extends Controller {
                 'message' => 'La entrada no existe'
             ];
         }
-
         return response()->json($data, $data['code']);
     }
 
@@ -151,18 +154,7 @@ class PostController extends Controller {
                     'changes' => $params_array
                 );
             }
-
-
-//            // Actualizar el post en concreto (por el ID)
-//            $where = [
-//              'id' => $id,
-//                'user_id' => $user->sub
-//            ];
-//            
-//            $post = Post::updateOrCreate($where, $params_array);
-            // Devolver datos/entrada updateada
         }
-
         return response()->json($data, $data['code']);
     }
 

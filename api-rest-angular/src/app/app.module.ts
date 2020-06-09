@@ -23,6 +23,7 @@ import { CategoryDetailComponent } from './components/category-detail/category-d
 /* cargamos lo necesario para la autenticación del proyecto */
 import { IdentityGuard } from './services/identity.guard';
 import { UserService } from './services/user.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UserService } from './services/user.service';
     PostNewComponent,
     PostDetailComponent,
     PostEditComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import { PostNewComponent } from './components/post-new/post-new.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 /* cargamos lo necesario para la autenticación del proyecto */
 import { IdentityGuard } from './services/identity.guard';
@@ -33,6 +34,7 @@ este parametro extra y que nos expulse de nuestra sesión*/
 {path: 'entrada/:id', component: PostDetailComponent},
 {path: 'editarEntrada/:id', component: PostEditComponent, canActivate: [IdentityGuard]},
 {path: 'categoria/:id', component: CategoryDetailComponent},
+{path: 'perfil/:id', component: ProfileComponent, canActivate: [IdentityGuard]},
 {path: 'error', component: ErrorComponent},
 /* si el usuario se equivoca y la ruta no existe... */
 {path: '**', component: ErrorComponent}

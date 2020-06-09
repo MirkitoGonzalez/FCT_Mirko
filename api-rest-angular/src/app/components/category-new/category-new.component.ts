@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { global } from '../../services/global';
 import { CategoryService } from '../../services/category.service';
+import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'newcategory',
@@ -45,8 +46,9 @@ response=> {
   if(response.status == 'success'){
     this.category = response.category;
     this.status = 'success';
-
-    this._router.navigate(['/inicio']);
+    this._categoryService.getCategories();
+    location.reload();this._router.navigate(['/inicio']);
+    
 
   }else{
     this.status = 'error';

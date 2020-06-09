@@ -1,0 +1,29 @@
+    <!-- Formulario Registro -->
+
+  <div class="container-fluid col-md-12 mt-3">
+    <h1 class="text-center justify"> {{ user.name + '' + ' ' + user.surname }} </h1>
+    <p class="text-center" id="pruebaseparado">🔥😌{{ user.role }}😌🔥 </p>
+  
+    <div class="card-columns text-center">
+      <article class="card w-100 text-center">
+        <div class="card-header">
+          <a href="mailto: {{user.email}}?subject=PruebaMirko&">
+            <img src="{{ '../../../../../assets/img/email.svg' }}" width="12%" class="" /> {{ user.email }}</a>
+        </div>
+        <div class="card-body">
+          <div class="post-image w-100" *ngIf="user.image">
+            <img src="{{ url + 'user/image/' + user.image }}" class="w-100" />
+          </div>
+          <!-- Action button de interacción -->
+          <div class="post-buttons mt-5">
+            <span>
+              <!-- <p [innerHtml]="post.content"> {{ post.content }} </p> -->
+              <p [innerHtml]="user.description"></p>
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="text-right" style="color: bisque;"> Cuenta actualizada a {{ today | date }}</p>
+  </div>
+  

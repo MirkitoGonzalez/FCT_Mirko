@@ -37,8 +37,8 @@
   
       <div class="form-group">
         <label for="image">Selecciona Imagen:  </label>
-        <div>
-          <img id="avatarEdit" src="" />
+        <div *ngIf="post.image">
+          <img id="avatarEdit" src="{{url + 'post/image/' + post.image }}" />
         </div>
   
         <angular-file-uploader [config]="afuConfig"

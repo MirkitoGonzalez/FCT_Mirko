@@ -9,7 +9,6 @@ import { User } from '../../models/user';
 import { Category } from '../../models/category';
 import { Post } from '../../models/post';
 import { AppComponent } from '../../app.component';
-// extra
 import { Inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
